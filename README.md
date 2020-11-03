@@ -1,0 +1,1 @@
+# Emojition project - Side project for Golang learning
