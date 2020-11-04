@@ -1,0 +1,5 @@
+db:
+  addr: localhost:5432
+  user: emojition
+  password: emojition
+  database: emojition
