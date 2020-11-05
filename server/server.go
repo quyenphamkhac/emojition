@@ -1,7 +1,9 @@
 package server
 
+import "os"
+
 // Init gin server
 func Init() {
 	r := NewRouter()
-	r.Run()
+	r.Run(os.Getenv("HOST"))
 }

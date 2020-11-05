@@ -1,5 +1,13 @@
 db:
-  addr: localhost:5432
+  host: localhost
+  port: 5432
   user: emojition
   password: emojition
   database: emojition
+  sslmode: disable
+  timezone: Asia/SaiGon
+auth:
+  secret: PKQUYEN
+server:
+  host: localhost
+  port: 8080
