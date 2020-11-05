@@ -21,7 +21,9 @@ func (p ProductController) Create(c *gin.Context) {
 	db := db.GetDB()
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 	book := models.Product{Price: input.Price, Code: input.Code}
 	book.CreateProduct(db)
+	c.JSON(http.StatusOK, gin.H{"data": book})
 }
