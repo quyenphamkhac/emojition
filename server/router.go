@@ -5,19 +5,22 @@ import (
 	"github.com/quyenphamkhac/emojition/controllers"
 )
 
+// NewRouter gin
 func NewRouter() *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
 	health := new(controllers.HealthController)
-	router.GET("/health", health.Status())
+	router.GET("/health", health.Status)
 
-	v1 := router.Group("v1")
+	api := router.Group("api")
 	{
-		userGroup := v1.Group("user")
+		productGroup := api.Group("product")
 		{
-			user := new(controllers)
+			product := new(controllers.ProductController)
+			productGroup.POST("/", product.Create)
 		}
 	}
+	return router
 }
