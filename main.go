@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/quyenphamkhac/emojition/config"
 	"github.com/quyenphamkhac/emojition/db"
+	"github.com/quyenphamkhac/emojition/migration"
 	"github.com/quyenphamkhac/emojition/server"
 )
 
@@ -17,5 +18,6 @@ func main() {
 	}
 	config.Init(os.Getenv("ENV"))
 	db.Init()
+	migration.Init()
 	server.Init()
 }

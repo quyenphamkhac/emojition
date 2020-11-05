@@ -5,7 +5,6 @@ import (
 
 	"github.com/quyenphamkhac/emojition/config"
 
-	"github.com/quyenphamkhac/emojition/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,7 +20,6 @@ func Init() {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	db.AutoMigrate(&models.Product{})
 }
 
 // GetDB func
