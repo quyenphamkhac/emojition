@@ -14,7 +14,7 @@ type UserController struct{}
 
 var userModel = new(models.UserModel)
 
-// Create ...
+// SignUp ...
 func (u UserController) SignUp(c *gin.Context) {
 	var input forms.SignUpInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -27,4 +27,20 @@ func (u UserController) SignUp(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": user})
+}
+
+// Login ...
+func (u UserController) Login(c *gin.Context) {
+	var input forms.LoginInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	accessToken, err := userModel.Login(input)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": accessToken})
 }

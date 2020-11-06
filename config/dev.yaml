@@ -7,7 +7,7 @@ db:
   sslmode: disable
   timezone: Asia/SaiGon
 auth:
-  secret: PKQUYEN
+  secret: EMOJITION_SECRET
 server:
   host: localhost
   port: 8080

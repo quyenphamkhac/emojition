@@ -23,6 +23,36 @@ type User struct {
 // UserModel ...
 type UserModel struct{}
 
+var authModel = new(AuthModel)
+
+// Login ...
+func (u *UserModel) Login(input forms.LoginInput) (AccessToken, error) {
+	var err error
+	var user User
+	db := db.GetDB()
+	userCheck := db.Where("username = ?", input.Username).First(&user)
+	if userCheck.Error != nil {
+		return AccessToken{}, userCheck.Error
+	}
+	bytePassword := []byte(input.Password)
+	byteHashedPassword := []byte(user.Password)
+	err = bcrypt.CompareHashAndPassword(byteHashedPassword, bytePassword)
+	if err != nil {
+		return AccessToken{}, err
+	}
+
+	token, err := authModel.GenerateToken(user)
+	if err != nil {
+		return AccessToken{}, err
+	}
+
+	err = authModel.SaveToken(token)
+	if err != nil {
+		return AccessToken{}, err
+	}
+	return *token, nil
+}
+
 // SignUp ...
 func (u *UserModel) SignUp(input forms.SignUpInput) (user User, err error) {
 	db := db.GetDB()

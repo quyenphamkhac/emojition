@@ -18,6 +18,7 @@ func NewRouter() *gin.Engine {
 	{
 		userController := new(controllers.UserController)
 		api.POST("/signup", userController.SignUp)
+		api.POST("/login", userController.Login)
 		productGroup := api.Group("product")
 		{
 			product := new(controllers.ProductController)

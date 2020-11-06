@@ -10,4 +10,5 @@ func Init() {
 	db := db.GetDB()
 	db.AutoMigrate(&models.Product{})
 	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.AccessToken{})
 }
